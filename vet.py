@@ -15,10 +15,35 @@ def on_message(client, userdata, msg):
     payload = str(msg.payload.decode("utf-8"))
     print(msg.topic+" "+payload)
     if (payload == "DUCK"):
-        print(">>> QUACK!")
+        on_duck()
     elif (payload == "HAPPY"):
-        print(">>> Yeaaaaaaah nice")
+        on_happy()
+    elif (payload == "SAD"):
+        on_sad()
+    elif (payload == "SKULL"):
+        on_skull()
+    elif (payload == "HEART"):
+        on_heart()
 
+# Callback when HAPPY is received
+def on_happy():
+    print(">>> Yeaaaaaaah nice")
+
+# Callback when DUCK is received
+def on_duck():
+    print(">>> QUACK!")
+
+# Callback when SAD is received
+def on_sad():
+    print(">>> BOOHOO!")
+
+# Callback when SKULL is received
+def on_skull():
+    print(">>> DOOOM!")
+
+# Callback when HEART is received
+def on_heart():
+    print(">>> Loooooove!")
 
 client = mqtt.Client()
 client.on_connect = on_connect
@@ -28,4 +53,6 @@ client.username_pw_set(config.mqttUsername, config.mqttPassword)
 
 client.connect("connect.nustem.uk", 1883, 60)
 
-client.loop_forever()
+while True:
+    # MQTT loop
+    client.loop()
