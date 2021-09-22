@@ -28,8 +28,10 @@ def on_message(client, userdata, msg):
         on_skull()
     elif (payload == "HEART"):
         on_heart()
+    elif (payload == "SILLY"):
+        on_silly()
 
-# Append messaegText to mqttMessageBox
+# Append messageText to mqttMessageBox
 def output(messageText):
     mqttMessageBox.append(messageText)
     mqttMessageBox.tk.see('end')
@@ -69,6 +71,12 @@ def on_heart():
     # print(messageText)
     pass
 
+def on_silly():
+    # messageText = '>>> Silly Silly Silly'
+    # output(messageText)
+    # print(messageText)
+    pass
+
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
@@ -101,12 +109,15 @@ def send_heart():
 def send_duck():
     send_message("DUCK")
 
+def send_silly():
+    send_message("SILLY")
+
 def mqtt_loop():
     # MQTT loop
     # Paho Python docs here: https://github.com/eclipse/paho.mqtt.python#network-loop
     client.loop()
 
-app = App(title="Connect Vet")
+app = App(title="Connect Vet", width=600)
 # message = Text(app, text = "Connect Vet")
 
 buttonBox = Box(app)
@@ -114,6 +125,7 @@ button = PushButton(buttonBox, align='left', width=5, command=send_happy, text="
 button = PushButton(buttonBox, align='left', width=5, command=send_sad, text="SAD")
 button = PushButton(buttonBox, align='left', width=5, command=send_skull, text="SKULL")
 button = PushButton(buttonBox, align='left', width=5, command=send_heart, text="HEART")
+button = PushButton(buttonBox, align='left', width=5, command=send_silly, text="SILLY")
 button = PushButton(buttonBox, align='left', width=5, command=send_duck, text="DUCK")
 
 mqttMessageBox = TextBox(app, width = 'fill', height = 'fill', multiline=True, scrollbar=True, text = "Starting up...")
