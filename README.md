@@ -8,6 +8,8 @@ Packaging as Python GUI (guiZero) apps, because we can't (quite) configure the M
 
 Diagnosis and direct-drive app for the network, handy for workshop use.
 
+GUIZero app, needs `tkinter`. On a Mac, `brew install python-tk` (brew Python3 doesn't automatically include tkinter, for whatever reason).
+
 ## Trainer
 
 Exercises individual Connect devices to assist in setting up servo movement arcs.
