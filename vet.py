@@ -1,7 +1,14 @@
 import paho.mqtt.client as mqtt
 from guizero import App, Text, PushButton, TextBox, Box
 from datetime import datetime
+from dataclasses import dataclass # https://docs.python.org/3/library/dataclasses.html
 import config
+
+@dataclass
+class ConnectedDevice:
+    """Class for keeping track of connected devices"""
+    mac: str
+    last_seen: datetime
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
