@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 from guizero import App, Text, PushButton, TextBox, Box
+from datetime import datetime
 import config
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -17,24 +18,36 @@ def on_message(client, userdata, msg):
     # Returned payload is a Byte string, need to decode to string
     payload = str(msg.payload.decode("utf-8"))
     print(msg.topic+" "+payload)
-    output(msg.topic+" "+payload)
-    if (payload == "DUCK"):
-        on_duck()
-    elif (payload == "HAPPY"):
-        on_happy()
-    elif (payload == "SAD"):
-        on_sad()
-    elif (payload == "SKULL"):
-        on_skull()
-    elif (payload == "HEART"):
-        on_heart()
-    elif (payload == "SILLY"):
-        on_silly()
+    if (msg.topic == "Connect/NUSTEM/MOOD"):
+        output(msg.topic+" "+payload)
+        if (payload == "DUCK"):
+            on_duck()
+        elif (payload == "HAPPY"):
+            on_happy()
+        elif (payload == "SAD"):
+            on_sad()
+        elif (payload == "SKULL"):
+            on_skull()
+        elif (payload == "HEART"):
+            on_heart()
+        elif (payload == "SILLY"):
+            on_silly()
+    else:
+        output_diagnostics(msg.topic+" "+payload)
 
 # Append messageText to mqttMessageBox
-def output(messageText):
-    mqttMessageBox.append(messageText)
+def output(message_text):
+    now = datetime.now()
+    output_text = "["+now.strftime("%H:%M:%S")+"]: "+message_text
+    mqttMessageBox.append(output_text)
     mqttMessageBox.tk.see('end')
+
+# Output blether into the secondary pane
+def output_diagnostics(message_text):
+    now = datetime.now()
+    output_text = "["+now.strftime("%H:%M:%S")+"]: "+message_text
+    diagnosticsMessageBox.append(output_text)
+    diagnosticsMessageBox.tk.see('end')
 
 # Callback when HAPPY is received
 def on_happy():
@@ -117,7 +130,7 @@ def mqtt_loop():
     # Paho Python docs here: https://github.com/eclipse/paho.mqtt.python#network-loop
     client.loop()
 
-app = App(title="Connect Vet", width=600)
+app = App(title="Connect Vet", width=700, height=650, layout="auto")
 # message = Text(app, text = "Connect Vet")
 
 buttonBox = Box(app)
@@ -128,7 +141,12 @@ button = PushButton(buttonBox, align='left', width=5, command=send_heart, text="
 button = PushButton(buttonBox, align='left', width=5, command=send_silly, text="SILLY")
 button = PushButton(buttonBox, align='left', width=5, command=send_duck, text="DUCK")
 
-mqttMessageBox = TextBox(app, width = 'fill', height = 'fill', multiline=True, scrollbar=True, text = "Starting up...")
+status_box = Box(app)
+mqttMessageBox = TextBox(status_box, align='left', width = '45', height = '20', multiline=True, scrollbar=True, text = "Starting up...")
+connectedDeviceMessageBox = TextBox(status_box, align='left', width = '45', height = '20', multiline=True, scrollbar=True, text = "")
+
+diagnostics_box = Box(app)
+diagnosticsMessageBox = TextBox(diagnostics_box, width = '93', height = '20', multiline=True, scrollbar=True, text = "")
 
 button = PushButton(app, command=do_connect, text="Clear/Reconnect")
 
