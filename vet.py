@@ -32,6 +32,9 @@ def on_message(client, userdata, msg):
             on_heart()
         elif (payload == "SILLY"):
             on_silly()
+    elif (msg.topic.startswith("/management/from/")):
+        if (payload == "255"):
+            output_diagnostics(msg.topic[17:29]+" "+payload)
     else:
         output_diagnostics(msg.topic+" "+payload)
 
