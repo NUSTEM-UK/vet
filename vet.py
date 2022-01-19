@@ -1,6 +1,64 @@
 import paho.mqtt.client as mqtt
 from guizero import App, Text, PushButton, TextBox, Box
+from datetime import datetime
 import config
+
+# TODO: more sensible way of populating this!
+connected_devices = {
+    "BCDDC29E8A3B": {
+        "cohort": "DEV",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "ECFABC2EEEF2": {
+        "cohort": "DEV",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB840EC3": {
+        "cohort": "000",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB83ADCB": {
+        "cohort": "000",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29EE1B1": {
+        "cohort": "000",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "ECFABC2EF5EB": {
+        "cohort": "000",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29ED86D": {
+        "cohort": "000",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29ED90D": {
+        "cohort": "000",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    }
+}
+
+# TODO: dump the above to JSON and import it instead
+#       slightly tricky because datetime isn't serialisable
+# with open("devices.json", "w") as f:
+#     json.dump(connected_devices, f)
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -17,24 +75,73 @@ def on_message(client, userdata, msg):
     # Returned payload is a Byte string, need to decode to string
     payload = str(msg.payload.decode("utf-8"))
     print(msg.topic+" "+payload)
-    output(msg.topic+" "+payload)
-    if (payload == "DUCK"):
-        on_duck()
-    elif (payload == "HAPPY"):
-        on_happy()
-    elif (payload == "SAD"):
-        on_sad()
-    elif (payload == "SKULL"):
-        on_skull()
-    elif (payload == "HEART"):
-        on_heart()
-    elif (payload == "SILLY"):
-        on_silly()
+    if (msg.topic == "Connect/NUSTEM/MOOD"):
+        output(msg.topic+" "+payload)
+        if (payload == "DUCK"):
+            on_duck()
+        elif (payload == "HAPPY"):
+            on_happy()
+        elif (payload == "SAD"):
+            on_sad()
+        elif (payload == "SKULL"):
+            on_skull()
+        elif (payload == "HEART"):
+            on_heart()
+        elif (payload == "SILLY"):
+            on_silly()
+    elif (msg.topic.startswith("/management/from/")):
+        if (payload == "255"):
+            # Trigger the device watching function with the MAC address
+            i_see_you(msg.topic[17:29])
+            # output_diagnostics(msg.topic[17:29]+" "+payload)
+    else:
+        output_diagnostics(msg.topic+" "+payload)
+
+def i_see_you(device_mac):
+    """Update last seen time for device_mac."""
+    now = datetime.now()
+
+    if (device_mac in connected_devices):
+        connected_devices[device_mac]["last_seen"] = now
+    else:
+        connected_devices[device_mac] = {
+            "first_seen": now,
+            "last_seen": now
+        }
+
+    # clear message box
+    connectedDeviceMessageBox.clear()
+
+    # Output devices list to interface pane
+    for device in sorted(connected_devices, key=lambda x: connected_devices[x]['last_seen'], reverse=True):
+        device_date = connected_devices[device]['last_seen'].date()
+        device_hour = connected_devices[device]['last_seen'].hour
+        device_minute = connected_devices[device]['last_seen'].minute
+        device_second = connected_devices[device]['last_seen'].second
+        device_cohort = connected_devices[device]['cohort']
+        # print(device_date, device_hour, device_minute, device_second)
+        output_string = device + f" [{device_cohort}] : {device_date} - {device_hour:02d}:{device_minute:02d}:{device_second:02d}"
+        output_devices(output_string)
+
 
 # Append messageText to mqttMessageBox
-def output(messageText):
-    mqttMessageBox.append(messageText)
+def output(message_text):
+    now = datetime.now()
+    output_text = "["+now.strftime("%H:%M:%S")+"]: "+message_text
+    mqttMessageBox.append(output_text)
     mqttMessageBox.tk.see('end')
+
+# Output blether into the secondary pane
+def output_diagnostics(message_text):
+    now = datetime.now()
+    output_text = "["+now.strftime("%H:%M:%S")+"]: "+message_text
+    diagnosticsMessageBox.append(output_text)
+    diagnosticsMessageBox.tk.see('end')
+
+
+def output_devices(message_text):
+    connectedDeviceMessageBox.append(message_text)
+    # connectedDeviceMessageBox.tk.see('end')
 
 # Callback when HAPPY is received
 def on_happy():
@@ -117,7 +224,7 @@ def mqtt_loop():
     # Paho Python docs here: https://github.com/eclipse/paho.mqtt.python#network-loop
     client.loop()
 
-app = App(title="Connect Vet", width=600)
+app = App(title="Connect Vet", width=700, height=650, layout="auto")
 # message = Text(app, text = "Connect Vet")
 
 buttonBox = Box(app)
@@ -128,7 +235,12 @@ button = PushButton(buttonBox, align='left', width=5, command=send_heart, text="
 button = PushButton(buttonBox, align='left', width=5, command=send_silly, text="SILLY")
 button = PushButton(buttonBox, align='left', width=5, command=send_duck, text="DUCK")
 
-mqttMessageBox = TextBox(app, width = 'fill', height = 'fill', multiline=True, scrollbar=True, text = "Starting up...")
+status_box = Box(app)
+mqttMessageBox = TextBox(status_box, align='left', width = '45', height = '20', multiline=True, scrollbar=True, text = "Starting up...")
+connectedDeviceMessageBox = TextBox(status_box, align='left', width = '45', height = '20', multiline=True, scrollbar=True, text = "")
+
+diagnostics_box = Box(app)
+diagnosticsMessageBox = TextBox(diagnostics_box, width = '93', height = '20', multiline=True, scrollbar=True, text = "")
 
 button = PushButton(app, command=do_connect, text="Clear/Reconnect")
 
