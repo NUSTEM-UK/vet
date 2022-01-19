@@ -6,49 +6,55 @@ import config
 # TODO: more sensible way of populating this!
 connected_devices = {
     "BCDDC29E8A3B": {
-        "cohort": "DEV",
+        "cohort": "DEV0",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "ECFABC2EEEF2": {
-        "cohort": "DEV",
+        "cohort": "DEV0",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29ECD02": {
+        "cohort": "LIF0",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "84F3EB840EC3": {
-        "cohort": "000",
+        "cohort": "0001",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "84F3EB83ADCB": {
-        "cohort": "000",
+        "cohort": "0001",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29EE1B1": {
-        "cohort": "000",
+        "cohort": "0001",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "ECFABC2EF5EB": {
-        "cohort": "000",
+        "cohort": "0001",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ED86D": {
-        "cohort": "000",
+        "cohort": "0001",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ED90D": {
-        "cohort": "000",
+        "cohort": "0001",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
