@@ -5,12 +5,6 @@ import config
 
 # TODO: more sensible way of populating this!
 connected_devices = {
-    "BCDDC29E8A3B": {
-        "cohort": "DEV0",
-        "first_seen": datetime.now(),
-        "last_seen": datetime.now(),
-        "number_of_flashes": 0
-    },
     "ECFABC2EEEF2": {
         "cohort": "DEV0",
         "first_seen": datetime.now(),
@@ -23,38 +17,86 @@ connected_devices = {
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
-    "84F3EB840EC3": {
-        "cohort": "0001",
-        "first_seen": datetime.now(),
-        "last_seen": datetime.now(),
-        "number_of_flashes": 0
-    },
-    "84F3EB83ADCB": {
-        "cohort": "0001",
-        "first_seen": datetime.now(),
-        "last_seen": datetime.now(),
-        "number_of_flashes": 0
-    },
-    "BCDDC29EE1B1": {
-        "cohort": "0001",
-        "first_seen": datetime.now(),
-        "last_seen": datetime.now(),
-        "number_of_flashes": 0
-    },
-    "ECFABC2EF5EB": {
-        "cohort": "0001",
-        "first_seen": datetime.now(),
-        "last_seen": datetime.now(),
-        "number_of_flashes": 0
-    },
     "BCDDC29ED86D": {
         "cohort": "0001",
+        "label": "011",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ED90D": {
         "cohort": "0001",
+        "label": "012",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29EE1B1": {
+        "cohort": "0001",
+        "label": "013",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB83A563": {
+        "cohort": "0001",
+        "label": "014",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "ECFABC2EF5EB": {
+        "cohort": "0001",
+        "label": "015",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EBA9ECBE": {
+        "cohort": "0001",
+        "label": "016",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29E8A3B": {
+        "cohort": "0001",
+        "label": "017",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB840EC3": {
+        "cohort": "0001",
+        "label": "018",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EBA9ECBE": {
+        "cohort": "0001",
+        "label": "019",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB83ADCB": {
+        "cohort": "0001",
+        "label": "020",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29ECD86": {
+        "cohort": "SPRE",
+        "label": "",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "ECFABC2F8BBA": {
+        "cohort": "SPRE",
+        "label": "",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
