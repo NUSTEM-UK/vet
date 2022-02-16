@@ -11,6 +11,12 @@ connected_devices = {
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
+    "ECFABC2EEE5D": {
+        "cohort": "DEV1",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
     "BCDDC29ECD02": {
         "cohort": "LIF0",
         "first_seen": datetime.now(),
@@ -100,6 +106,20 @@ connected_devices = {
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
+    },
+    "ECFABC2EECB9": {
+        "cohort": "JOE0",
+        "label": "",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "ECFABC2EFA2F": {
+        "cohort": "JOE1",
+        "label": "",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
     }
 }
 
@@ -153,8 +173,11 @@ def i_see_you(device_mac):
         connected_devices[device_mac]["last_seen"] = now
     else:
         connected_devices[device_mac] = {
+            "cohort": "????",
+            "label": "",
             "first_seen": now,
-            "last_seen": now
+            "last_seen": now,
+            "number_of_flashes": 0
         }
 
     # clear message box
