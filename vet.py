@@ -24,21 +24,21 @@ connected_devices = {
         "number_of_flashes": 0
     },
     "BCDDC29ED86D": {
-        "cohort": "0001",
+        "cohort": "0002",
         "label": "011",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ED90D": {
-        "cohort": "0001",
+        "cohort": "0002",
         "label": "012",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29EE1B1": {
-        "cohort": "0001",
+        "cohort": "0002",
         "label": "013",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
@@ -87,29 +87,29 @@ connected_devices = {
         "number_of_flashes": 0
     },
     "84F3EB83ADCB": {
-        "cohort": "0001",
+        "cohort": "0002",
         "label": "020",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ECD86": {
-        "cohort": "SPRE",
-        "label": "",
+        "cohort": "0002",
+        "label": "022",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "ECFABC2F8BBA": {
-        "cohort": "SPRE",
-        "label": "",
+        "cohort": "0002",
+        "label": "021",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "ECFABC2EECB9": {
-        "cohort": "JOE0",
-        "label": "",
+        "cohort": "0002",
+        "label": "023",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
@@ -117,6 +117,48 @@ connected_devices = {
     "ECFABC2EFA2F": {
         "cohort": "JOE1",
         "label": "",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29EC42E": {
+        "cohort": "0002",
+        "label": "024",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29F4B8D": {
+        "cohort": "0002",
+        "label": "025",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB840B94": {
+        "cohort": "0002",
+        "label": "026",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29ECE46": {
+        "cohort": "0002",
+        "label": "027",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29EE0C3": {
+        "cohort": "0002",
+        "label": "028",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "ECFABC2F8BAF": {
+        "cohort": "0002",
+        "label": "029",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
@@ -162,7 +204,7 @@ def on_message(client, userdata, msg):
             # Trigger the device watching function with the MAC address
             i_see_you(msg.topic[17:29])
             # output_diagnostics(msg.topic[17:29]+" "+payload)
-    else:
+    else:a
         output_diagnostics(msg.topic+" "+payload)
 
 def i_see_you(device_mac):
