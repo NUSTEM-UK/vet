@@ -24,7 +24,7 @@ connected_devices = {
         "number_of_flashes": 0
     },
     "BCDDC29ED86D": {
-        "cohort": "0002",
+        "cohort": "NDEV",
         "label": "011",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
@@ -204,7 +204,7 @@ def on_message(client, userdata, msg):
             # Trigger the device watching function with the MAC address
             i_see_you(msg.topic[17:29])
             # output_diagnostics(msg.topic[17:29]+" "+payload)
-    else:a
+    else:
         output_diagnostics(msg.topic+" "+payload)
 
 def i_see_you(device_mac):
