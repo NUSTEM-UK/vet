@@ -5,20 +5,37 @@ import config
 
 # TODO: more sensible way of populating this!
 connected_devices = {
+    "BCDDC29F4BC2": {
+        "cohort": "DEV0",
+        "label": "007",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "84F3EB8400B6": {
+        "cohort": "DEV0",
+        "label": "006",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
     "ECFABC2EEEF2": {
         "cohort": "DEV0",
+        "label": "????",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "ECFABC2EEE5D": {
         "cohort": "DEV1",
+        "label": "????",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ECD02": {
         "cohort": "LIF0",
+        "label": "????",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
@@ -75,13 +92,6 @@ connected_devices = {
     "84F3EB840EC3": {
         "cohort": "0001",
         "label": "018",
-        "first_seen": datetime.now(),
-        "last_seen": datetime.now(),
-        "number_of_flashes": 0
-    },
-    "84F3EBA9ECBE": {
-        "cohort": "0001",
-        "label": "019",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
