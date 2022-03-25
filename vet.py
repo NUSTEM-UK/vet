@@ -21,12 +21,14 @@ connected_devices = {
     },
     "ECFABC2EEE5D": {
         "cohort": "DEV1",
+        "label": "",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
     },
     "BCDDC29ECD02": {
         "cohort": "LIF0",
+        "label": "",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
