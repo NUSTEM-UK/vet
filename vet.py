@@ -7,6 +7,14 @@ import config
 connected_devices = {
     "ECFABC2EEEF2": {
         "cohort": "DEV0",
+        "label": "",
+        "first_seen": datetime.now(),
+        "last_seen": datetime.now(),
+        "number_of_flashes": 0
+    },
+    "BCDDC29EC980": {
+        "cohort": "DEV0",
+        "label": "003",
         "first_seen": datetime.now(),
         "last_seen": datetime.now(),
         "number_of_flashes": 0
